@@ -3,16 +3,24 @@ const dotenv = require('dotenv');
 const connectDB = require('./config/db');
 const authRoutes = require('./routes/authRoutes');
 const resourceRoutes = require('./routes/resourceRoutes');
-
-dotenv.config();
-connectDB(); // Connect to DB
+const categoryRoutes = require('./routes/categoryRoutes');
 
 const app = express();
 app.use(express.json());
 
+const cors = require('cors');
+app.use(cors({
+  origin: 'http://localhost:3000',
+  credentials: true 
+}));
+
+dotenv.config();
+connectDB(); // Connect to DB
+
 // Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/resources', resourceRoutes);
+app.use('/api/categories', categoryRoutes);
 
 // Default route
 app.get('/', (req, res) => {

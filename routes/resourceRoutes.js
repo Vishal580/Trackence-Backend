@@ -6,7 +6,9 @@ const {
   createResource,
   getResourceById,
   markResourceComplete,
-  getSummary
+  getSummary,
+  updateResource,
+  deleteResource
 } = require('../controllers/resourceController');
 
 router.use(protect); // Protect all resource routes
@@ -16,5 +18,7 @@ router.post('/', createResource);
 router.get('/:id', getResourceById);
 router.post('/:id/mark-complete', markResourceComplete);
 router.get('/summary/data', getSummary); // adjusted to avoid route conflict with `/:id`
+router.put('/:id', updateResource);
+router.delete('/:id', deleteResource);
 
 module.exports = router;
